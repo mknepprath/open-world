@@ -76,7 +76,7 @@ export const generateMap = mapSize => {
  * @param {number} size - The size of the current map.
  * @returns {OpenWorldCoords} - The coordinates of the tile.
  */
-export const indexToOpenWorldCoords = (index, size) => ({
+export const indexToCoords = (index, size) => ({
   top: Math.floor(index / size),
   left: index % size
 })
