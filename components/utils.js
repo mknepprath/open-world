@@ -1,8 +1,17 @@
 /**
+ * @typedef {Object} OpenWorldCoords
+ * @property {number} left
+ * @property {number} top
+ */
+/**
+ * @typedef {Array<Array<number>>} OpenWorldMap
+ * Map matrix (array of arrays).
+ * TODO: What do the numbers represent?
+ */
+
+/**
  * Convert coordinate values to index.
- * @param {Object} coords - The coordinates of the tile.
- * @param {number} coords.left - The left coordinate of the tile.
- * @param {number} coords.top - The top coordinate of the tile.
+ * @param {OpenWorldCoords} coords - The coordinates of the tile.
  * @param {number} size - The size of the current map.
  * @returns {number} - The index of the tile.
  */
@@ -10,8 +19,8 @@ export const coordsToIndex = (coords, size) => (coords.top * size) + coords.left
 
 /**
  * Find an unblocked map tile.
- * @param {Object[]} map - The map matrix (array of arrays).
- * @returns {Object} - The coordinates of the unblocked position.
+ * @param {OpenWorldMap} map
+ * @returns {OpenWorldCoords} - The coordinates of the unblocked position.
  */
 export const findUnblockedTile = map => {
   let spawn = {}
@@ -23,6 +32,14 @@ export const findUnblockedTile = map => {
   return spawn
 }
 
+/**
+ * TODO: What does this function do?
+ *  - I think it just flips the state of a single tile..? Potentially two?
+ * @param {OpenWorldCoords} blockTiles
+ * @param {OpenWorldCoords} clearTiles
+ * @param {OpenWorldMap} map
+ * @return {OpenWorldMap}
+ */
 export const flipTiles = (blockTiles, clearTiles, map) => {
   // Perhaps these args should be arrays...
   const nextMap = [...map]
@@ -36,7 +53,7 @@ export const flipTiles = (blockTiles, clearTiles, map) => {
 /**
  * Generate a map matrix for tracking tiles.
  * @param {number} mapSize - The size of the map.
- * @returns {Object[]} - The map matrix (array of arrays).
+ * @returns {Array<Array<number>>} - The map matrix (array of arrays).
  */
 export const generateMap = mapSize => {
   let row = []
@@ -57,9 +74,9 @@ export const generateMap = mapSize => {
  * Converts index values to coordinates.
  * @param {number} index - The index of the tile.
  * @param {number} size - The size of the current map.
- * @returns {Object} - The coordinates of the tile.
+ * @returns {OpenWorldCoords} - The coordinates of the tile.
  */
-export const indexToCoords = (index, size) => ({
+export const indexToOpenWorldCoords = (index, size) => ({
   top: Math.floor(index / size),
   left: index % size
 })
@@ -67,7 +84,7 @@ export const indexToCoords = (index, size) => ({
 /**
  * Find a random map tile.
  * @param {number} mapSize - The size of the map.
- * @returns {Object} - Random coordinates within the current map.
+ * @returns {OpenWorldCoords} - Random coordinates within the current map.
  */
 export const randomSpawn = mapSize => ({
   left: Math.floor(Math.random() * mapSize),
@@ -76,11 +93,11 @@ export const randomSpawn = mapSize => ({
 
 /**
  * Shuffle an array.
- * @param {Object[]} array - An array to shuffle.
- * @returns {Object[]} - The shuffled array.
+ * @param {Array} array - An array to shuffle.
+ * @returns {Array} - The shuffled array.
  */
 export const shuffle = array => {
-  var currentIndex = array.length, temporaryValue, randomIndex
+  let currentIndex = array.length, temporaryValue, randomIndex
 
   // While there remain elements to shuffle...
   while (0 !== currentIndex) {
