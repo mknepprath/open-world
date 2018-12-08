@@ -1,4 +1,7 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
+import { coordsPropType } from './constants'
 
 import styles from './Rock.css'
 
@@ -39,6 +42,11 @@ class Rock extends React.Component {
       />
     )
   }
+}
+
+Rock.propTypes = {
+  flipTiles: PropTypes.func.isRequired,
+  spawn: coordsPropType.isRequired
 }
 
 export default Rock

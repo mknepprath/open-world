@@ -1,6 +1,8 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import { coordsToIndex, indexToCoords } from './utils'
+import { spawnConfigPropType } from './constants'
 
 import styles from './Map.css'
 
@@ -37,6 +39,9 @@ class Map extends React.Component {
       })
     }
 
+    /**
+     * @type {{backgroundIds: string[]}}
+     */
     this.state = {
       backgroundIds
     }
@@ -72,6 +77,20 @@ class Map extends React.Component {
       </div>
     )
   }
+}
+
+Map.propTypes = {
+  devMode: PropTypes.bool,
+  interior: PropTypes.bool,
+  map: PropTypes.arrayOf(
+    PropTypes.arrayOf(PropTypes.number)
+  ).isRequired,
+  water: PropTypes.arrayOf(spawnConfigPropType())
+}
+Map.defaultProps = {
+  devMode: false,
+  interior: false,
+  water: undefined
 }
 
 export default Map

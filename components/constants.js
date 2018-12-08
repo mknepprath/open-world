@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types'
+
 export const FACING = {
   'Bottom': 'down',
   'Left': 'left',
@@ -39,3 +41,14 @@ export const WATER = [
   { spawn: { left: 15, top: 14 } },
   { spawn: { left: 16, top: 14 } }
 ]
+
+export const coordsPropType = PropTypes.shape({
+  left: PropTypes.number.isRequired,
+  top: PropTypes.number.isRequired
+})
+
+export const spawnConfigPropType = () => PropTypes.shape({
+  key: PropTypes.string,
+  spawn: PropTypes.shape(coordsPropType).isRequired,
+  spriteType: PropTypes.string
+})

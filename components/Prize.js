@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import { findUnblockedTile } from './utils'
 
@@ -56,7 +57,13 @@ class Prize extends React.Component {
         }}
       />
     )
-    }
   }
+}
+
+Prize.propTypes = {
+  flipTiles: PropTypes.func.isRequired,
+  map: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
+  updateScore: PropTypes.func.isRequired
+}
 
 export default Prize

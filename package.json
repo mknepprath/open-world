@@ -11,6 +11,7 @@
     "next": "^7.0.2",
     "postcss-normalize": "^7.0.1",
     "postcss-preset-env": "^6.4.0",
+    "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3"
   },

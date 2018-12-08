@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 import { shuffle } from './utils'
-import { FACING } from './constants'
+import {
+  FACING,
+  coordsPropType
+} from './constants'
 
 import styles from './NPC.css'
 
@@ -136,6 +140,17 @@ class NPC extends Component {
       />
     )
   }
+}
+
+NPC.propTypes = {
+  devMode: PropTypes.bool,
+  flipTiles: PropTypes.func.isRequired,
+  map: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
+  spawn: coordsPropType.isRequired,
+  spriteType: PropTypes.string.isRequired
+}
+NPC.defaultProps = {
+  devMode: false
 }
 
 export default NPC
